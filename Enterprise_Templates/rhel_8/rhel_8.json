@@ -18,7 +18,7 @@
         "ks.cfg"
       ],
       "folder": "{{user `folder`}}",
-      "guest_os_type": "centos8_64Guest",
+      "guest_os_type": "rhel8_64Guest",
       "host": "{{user `host`}}",
       "insecure_connection": "true",
       "iso_checksum": "{{user `iso-checksum-type`}}:{{user `iso-checksum`}}",
