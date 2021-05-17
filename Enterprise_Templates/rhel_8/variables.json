@@ -1,0 +1,24 @@
+{
+  "vm-name": "RHEL-8-Template",
+  "vcenter-server":"<ip>",
+  "vcenter-username":"<vcenter-username>",
+  "vcenter-password": "<vcenter-password>",
+  
+  "datacenter": "<datacenter>",
+  "datastore": "<datastore>",
+  "folder": "Templates",
+  "cluster": "<cluster>",
+  "network": "<network>",
+  
+  "vm-cpu-num": "1",
+  "vm-mem-size": "1024",
+  "vm-disk-size": "10240",
+    
+  "ssh-pty" : "true",
+  "ssh-username": "root",
+  "ssh-password": "server",
+  
+  "iso-paths": "[<datastore>] ISOS/rhel-8.3-x86_64-dvd.iso",
+  "iso-checksum": "<iso-checksum>",
+  "iso-checksum-type": "sha256"
+}
