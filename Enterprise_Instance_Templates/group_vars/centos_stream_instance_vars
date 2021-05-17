@@ -1,0 +1,7 @@
+centos_stream_template: "CentOS-Stream-Template"
+centos_stream_vm_name: "CentOS Stream"
+centos_stream_ip: "<centos_stream_ip>"
+centos_stream_netmask: "<centos_stream_netmask>"
+centos_stream_gateway: "<centos_stream_gateway>"
+centos_stream_local_hostname: "centos-stream"
+

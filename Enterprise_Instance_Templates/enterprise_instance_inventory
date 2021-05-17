@@ -1,0 +1,26 @@
+[default]
+<hostname_1> ansible_sudo_pass=server ansible_ssh_user=root ansible_ssh_pass=server ansible_ssh_private_key_file=~/.ssh/id_rsa
+<hostname_2> ansible_sudo_pass=server ansible_ssh_user=root ansible_ssh_pass=server ansible_ssh_private_key_file=~/.ssh/id_rsa
+<hostname_3> ansible_sudo_pass=server ansible_ssh_user=root ansible_ssh_pass=server ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+[localhost_vars]
+127.0.0.1
+
+[vcenter_instance_vars]
+127.0.0.1
+<hostname_1>
+<hostname_2>
+<hostname_3>
+
+[rhel_8_instance_vars]
+127.0.0.1
+<hostname_1>
+
+[centos_stream_instance_vars]
+127.0.0.1
+<hostname_2>
+
+[oracle_8_instance_vars]
+127.0.0.1
+<hostname_3>
+

@@ -1,0 +1,2 @@
+ansible_python_interpreter: "/home/local/automated-devops/venv/bin/python3"
+

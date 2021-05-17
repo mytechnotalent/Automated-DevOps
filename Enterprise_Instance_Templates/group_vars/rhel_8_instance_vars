@@ -1,0 +1,9 @@
+rhel_8_template: "RHEL-8-Template"
+rhel_8_vm_name: "RHEL 8"
+rhel_8_ip: "<rhel_8_ip>"
+rhel_8_netmask: "<rhel_8_netmask>"
+rhel_8_gateway: "<rhel_8_gateway>"
+rhel_8_local_hostname: "rhel-8"
+rhel_8_username: "<rhel_8_username>"  # access.redhat.com
+rhel_8_password: "<rhel_8_password>"  # access.redhat.com
+

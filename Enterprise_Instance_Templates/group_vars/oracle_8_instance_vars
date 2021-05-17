@@ -1,0 +1,7 @@
+oracle_8_template: "Oracle-8-Template"
+oracle_8_vm_name: "Oracle 8"
+oracle_8_ip: "<oracle_8_ip>"
+oracle_8_netmask: "<oracle_8_netmask>"
+oracle_8_gateway: "<oracle_8_gateway>"
+oracle_8_local_hostname: "oracle-8"
+

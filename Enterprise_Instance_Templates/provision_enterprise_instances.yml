@@ -1,0 +1,64 @@
+- name: Pre-provision image
+  hosts: default 
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  vars:
+    ansible_sudo_pass: "{{ ansible_ssh_pass }}"
+    ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
+    ansible_become_password: server
+    custom_packages:
+      - open-vm-tools
+      - perl
+      - cloud-init
+    pubkeys:
+      - files/lab_admin.pub
+
+  tasks:
+    - name: Create local user
+      user:
+        name: local
+        shell: /bin/bash
+        state: present
+
+    - name: Install admin level pubkeys
+      authorized_key:
+        user: local
+        state: present
+        key: "{{ lookup('file', item) }}"
+      loop: "{{ pubkeys }}"
+
+- name: Register Red Hat Manager
+  hosts: 192.168.22.100
+  gather_facts: no
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Register and auto-subscribe to Red Hat Subscription Manager
+      community.general.redhat_subscription:
+        state: present
+        username: "{{ rhel_8_username }}"
+        password: "{{ rhel_8_password }}"
+        auto_attach: yes
+
+- name: Provision image
+  hosts: default
+  gather_facts: no
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Upgrade all packages
+      dnf:
+        name: "*"
+        state: latest
+
+    - name: Install dnf-plugins-core, python3 & git packages
+      dnf:
+        name:
+          - dnf-plugins-core
+          - python3
+          - git
+        state: latest
+

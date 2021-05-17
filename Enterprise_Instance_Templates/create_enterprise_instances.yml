@@ -1,0 +1,84 @@
+---
+- name: Create VM instances
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Clone a virtual machine from RHEL 8 template and customize
+      community.vmware.vmware_guest:
+        validate_certs: no
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        datacenter: "{{ datacenter }}"
+        state: present
+        folder: "{{ folder }}"
+        template: "{{ rhel_8_template }}"
+        name: "{{ rhel_8_vm_name }}"
+        networks:
+          - name: "{{ network }}"
+            ip: "{{ rhel_8_ip }}"
+            netmask: "{{ rhel_8_netmask }}"
+            gateway: "{{ rhel_8_gateway }}"
+        wait_for_ip_address: True
+        customization:
+          hostname: "{{ rhel_8_local_hostname }}"
+          dns_servers:
+            - "{{ dns1 }}"
+            - "{{ dns2 }}"
+          dns_suffix:
+            - "{{ dns_suffix }}"
+
+    - name: Clone a virtual machine from CentOS Stream template and customize
+      community.vmware.vmware_guest:
+        validate_certs: no
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        datacenter: "{{ datacenter }}"
+        state: present
+        folder: "{{ folder }}"
+        template: "{{ centos_stream_template }}"
+        name: "{{ centos_stream_vm_name }}"
+        cluster: "{{ cluster }}"
+        networks:
+          - name: "{{ network }}"
+            ip: "{{ centos_stream_ip }}"
+            netmask: "{{ centos_stream_netmask }}"
+            gateway: "{{ centos_stream_gateway }}"
+        wait_for_ip_address: True
+        customization:
+          hostname: "{{ centos_stream_local_hostname }}"
+          dns_servers:
+            - "{{ dns1 }}"
+            - "{{ dns2 }}"
+          dns_suffix:
+            - "{{ dns_suffix }}"
+
+    - name: Clone a virtual machine from Oracle 8 template and customize
+      community.vmware.vmware_guest:
+        validate_certs: no
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        datacenter: "{{ datacenter }}"
+        state: present
+        folder: "{{ folder }}"
+        template: "{{ oracle_8_template }}"
+        name: "{{ oracle_8_vm_name }}"
+        cluster: "{{ cluster }}"
+        networks:
+          - name: "{{ network }}"
+            ip: "{{ oracle_8_ip }}"
+            netmask: "{{ oracle_8_netmask }}"
+            gateway: "{{ oracle_8_gateway }}"
+        wait_for_ip_address: True
+        customization:
+          hostname: "{{ oracle_8_local_hostname }}"
+          dns_servers:
+            - "{{ dns1 }}"
+            - "{{ dns2 }}"
+          dns_suffix:
+            - "{{ dns_suffix }}"
+
