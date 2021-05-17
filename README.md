@@ -13,6 +13,9 @@ https://github.com/mytechnotalent/Automated-DevOps.git
 ./setup.sh
 ```
 
+## Step 3: Import Repo In GitLab
+[Instructions](https://docs.gitlab.com/ee/user/project/import/github.html)
+
 IN DEVELOPMENT...
 
 ## License
