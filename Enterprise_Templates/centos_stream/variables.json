@@ -1,0 +1,24 @@
+{
+  "vm-name": "CentOS-Stream-Template",
+  "vcenter-server":"<ip>",
+  "vcenter-username":"<vcenter-username>",
+  "vcenter-password": "<vcenter-password>",
+  
+  "datacenter": "<datacenter>",
+  "datastore": "<datastore>",
+  "folder": "Templates",
+  "cluster": "<cluster>",
+  "network": "Default Network",
+  
+  "vm-cpu-num": "1",
+  "vm-mem-size": "1024",
+  "vm-disk-size": "10240",
+    
+  "ssh-pty" : "true",
+  "ssh-username": "root",
+  "ssh-password": "server",
+  
+  "iso-url": "http://mirror.centos.iad1.serverforge.org/8-stream/isos/x86_64/CentOS-Stream-8-x86_64-20210506-dvd1.iso",
+  "iso-checksum": "73940ae1005b1c89e11c5f4f8c11ade5cc6ef52be067dea448a54bec81ac2c17",
+  "iso-checksum-type": "sha256"
+}
