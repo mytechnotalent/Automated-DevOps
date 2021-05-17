@@ -6,7 +6,7 @@
       "RAM_reserve_all": true,
       "boot_command": [
         "<up><wait><tab><wait>",
-        " ks=https://raw.githubusercontent.com/mytechnotalent/Automated-DevOps/main/Enterprise_Templates/rhel_8/ks.cfg<enter>"
+        " inst.ks=https://raw.githubusercontent.com/mytechnotalent/Automated-DevOps/main/Enterprise_Templates/rhel_8/kickstart.cfg<enter>"
       ],
       "boot_order": "disk,cdrom",
       "cluster": "{{user `cluster`}}",
@@ -14,15 +14,12 @@
       "datacenter": "{{user `datacenter`}}",
       "datastore": "{{user `datastore`}}",
       "disk_controller_type": "pvscsi",
-      "floppy_files": [
-        "ks.cfg"
-      ],
       "folder": "{{user `folder`}}",
-      "guest_os_type": "centos8_64Guest",
+      "guest_os_type": "rhel8_64Guest",
       "host": "{{user `host`}}",
       "insecure_connection": "true",
       "iso_checksum": "{{user `iso-checksum-type`}}:{{user `iso-checksum`}}",
-      "iso_urls": "{{user `iso-url`}}",
+      "iso_paths": "{{user `iso-paths`}}",
       "network_adapters": [
         {
           "network": "{{user `network`}}",
@@ -54,4 +51,3 @@
     }
   ]
 }
-
