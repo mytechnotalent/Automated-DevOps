@@ -8,7 +8,7 @@
   "datastore": "<datastore>",
   "folder": "Templates",
   "cluster": "<cluster>",
-  "network": "Default Network",
+  "network": "<network>",
   
   "vm-cpu-num": "1",
   "vm-mem-size": "1024",
