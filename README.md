@@ -34,12 +34,22 @@ cat ~/.ssh/id_rsa.pub
 ```bash
 git clone git@gitlab.com:<gitlab-account>/automated-devops.git
 cd automated-devops
-
+vim ~/.vimrc
+  set number
+  set tabstop=2    
+  set shiftwidth=2
+  set expandtab 
+  syntax on
 ```
 
 ## Step 6: Register GitLab Runner
 ```bash
-su  # password: server
+sudo gitlab-runner register  # password: server
+  https://gitlab.com
+  [Settings, CI/CD, Runners, Expand, registration token, copy]
+  gitlab-runner
+  ci
+  shell
 
 ```
 
