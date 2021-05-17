@@ -1,0 +1,24 @@
+stages:
+  - create-enterprise-instances
+  - provision-enterprise-instances
+
+create-enterprise-instances-code-job:
+  stage: create-enterprise-instances
+  script:
+    - cd /home/local/automated-devops
+    - source venv/bin/activate
+    - cd /home/local/automated-devops/Enterprise_Instance_Templates
+    - ansible-playbook -i enterprise_instance_inventory create_enterprise_instances.yml 
+  tags:
+    - ci
+
+provision-enterprise-instances-code-job:
+  stage: provision-enterprise-instances
+  script:
+    - cd /home/local/automated-devops
+    - source venv/bin/activate
+    - cd /home/local/automated-devops/Enterprise_Instance_Templates
+    - ansible-playbook -i enterprise_instance_inventory provision_enterprise_instances.yml 
+  tags:
+    - ci
+  
