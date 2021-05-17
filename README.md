@@ -42,7 +42,7 @@ vim ~/.vimrc
   syntax on
 ```
 
-## Step 6: Register GitLab Runner
+## Step 7: Register GitLab Runner
 ```bash
 sudo gitlab-runner register  # password: server
   https://gitlab.com
@@ -50,8 +50,20 @@ sudo gitlab-runner register  # password: server
   gitlab-runner
   ci
   shell
-
+sudo gitlab-runner status
 ```
+
+## Step 8: Setup Automation Environment
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt 
+
+## Step 9: Automate Enterprise Instance Template Creation
+```bash
+
+
 
 ## License
 [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
