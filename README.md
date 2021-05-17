@@ -8,7 +8,7 @@ Automated DevOps is a repo that integrates Red Hat Linux 8, CentOS Stream and Or
 git clone https://github.com/mytechnotalent/Automated-DevOps.git
 ```
 
-## Step 2: Run `setup.sh`
+## Step 2: Run `setup.sh` [MAC]
 ```bash
 ./setup.sh
 ```
@@ -72,6 +72,12 @@ git push
 ## Step 9: Automate Enterprise Instance Template Creation
 ```bash
 sudo gitlab-runner run
+```
+
+## Step 10: Automate GitLab Runner Template & Enterprise Instance Template Destruction [MAC]
+```bash
+ansible-playbook -i GitLab_Runner_Template/gitlab_runner_inventory GitLab_Runner_Template/destroy_gitlab_runner_template.yml
+ansible-playbook -i Enterprise_Instance_Templates/enterprise_instance_inventory Enterprise_Instance_Templates/destroy_enterprise_instances.yml
 ```
 
 ## License
