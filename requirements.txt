@@ -1,0 +1,6 @@
+requests
+selenium
+ansible
+pyvim
+pyvmomi
+
