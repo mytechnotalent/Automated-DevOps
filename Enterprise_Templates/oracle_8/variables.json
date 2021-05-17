@@ -1,0 +1,24 @@
+{
+  "vm-name": "Oracle-8-Template",
+  "vcenter-server":"<ip>",
+  "vcenter-username":"<vcenter-username>",
+  "vcenter-password": "<vcenter-password>",
+  
+  "datacenter": "<datacenter>",
+  "datastore": "<datastore>",
+  "folder": "Templates",
+  "cluster": "<cluster>",
+  "network": "Default Network",
+  
+  "vm-cpu-num": "1",
+  "vm-mem-size": "1024",
+  "vm-disk-size": "10240",
+    
+  "ssh-pty" : "true",
+  "ssh-username": "root",
+  "ssh-password": "server",
+  
+  "iso-url": "https://yum.oracle.com/ISOS/OracleLinux/OL8/u3/x86_64/OracleLinux-R8-U3-x86_64-dvd.iso",
+  "iso-checksum": "771e383adfd5406d1a360ff24822011a88cbb45b6019e2f1095758c46a406aaa",
+  "iso-checksum-type": "sha256"
+}
