@@ -1,0 +1,18 @@
+---
+- name: Destroy VM instance
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Power down and destroy VM instance 
+      community.vmware.vmware_guest:
+        validate_certs: no
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        name: "{{ vm_name }}"
+        delete_from_inventory: yes
+        state: absent
+        force: yes
+

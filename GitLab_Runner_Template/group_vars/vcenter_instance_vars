@@ -1,0 +1,11 @@
+vcenter_hostname: "<vcenter_hostname>"
+vcenter_username: "<vcenter_username>"
+vcenter_password: "<vcenter_password>"
+datacenter: "<datacenter>"
+folder: "/"
+cluster: "<cluster>"
+network: "<network>
+dns1: "<dns1>"
+dns2: "8.8.8.8"
+dns_suffix: "<dns_suffix>"
+

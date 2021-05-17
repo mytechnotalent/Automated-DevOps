@@ -1,0 +1,7 @@
+template: "CentOS-Stream-Template"
+vm_name: "GitLab Runner"
+ip: "<ip>"
+netmask: "<netmask>"
+gateway: "<gateway>
+local_hostname: "gitlab-runner"
+

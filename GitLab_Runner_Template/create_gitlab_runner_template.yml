@@ -1,0 +1,155 @@
+---
+- name: Create VM instance 
+  hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Clone a virtual machine from Linux template and customize
+      community.vmware.vmware_guest:
+        validate_certs: no
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        datacenter: "{{ datacenter }}"
+        state: present
+        folder: "{{ folder }}"
+        template: "{{ template }}"
+        name: "{{ vm_name }}"
+        cluster: "{{ cluster }}"
+        networks:
+          - name: "{{ network }}"
+            ip: "{{ ip }}"
+            netmask: "{{ netmask }}"
+            gateway: "{{ gateway }}"
+        wait_for_ip_address: True
+        customization:
+          hostname: "{{ local_hostname }}"
+          dns_servers:
+            - "{{ dns1 }}"
+            - "{{ dns2 }}"
+          dns_suffix:
+            - "{{ dns_suffix }}"
+
+- name: Pre-provision image
+  hosts: default 
+  gather_facts: no
+  become: yes
+  become_method: sudo
+  vars:
+    ansible_sudo_pass: "{{ ansible_ssh_pass }}"
+    ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
+    ansible_become_password: server
+    custom_packages:
+      - open-vm-tools
+      - perl
+      - cloud-init
+    pubkeys:
+      - files/lab_admin.pub
+
+  tasks:
+    - name: Create local user
+      user:
+        name: local
+        shell: /bin/bash
+        state: present
+
+    - name: Install admin level pubkeys
+      authorized_key:
+        user: local
+        state: present
+        key: "{{ lookup('file', item) }}"
+      loop: "{{ pubkeys }}"
+
+- name: Provision image
+  hosts: default
+  gather_facts: no
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Upgrade all packages
+      dnf:
+        name: "*"
+        state: latest
+
+    - name: Install dnf-plugins-core, python3 & git packages
+      dnf:
+        name:
+          - dnf-plugins-core
+          - python3
+          - git
+        state: latest
+
+    - name: Setup disable config for root login, password auth, empty pw's and enable config for public key auth
+      lineinfile:
+        path: "{{ item.path }}"
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        owner: root
+        group: root
+        state: present
+        create: "{{ item.create | default('no') }}"
+        insertbefore: "{{ item.instertbefore | default(omit) }}"
+        validate: "{{ item.validate | default(omit) }}"
+      loop:
+        - path: /etc/ssh/sshd_config
+          regexp: "^PermitRootLogin yes"
+          line: "#PermitRootLogin"
+        - path: /etc/ssh/sshd_config
+          regexp: "^PasswordAuthentication"
+          line: "#PasswordAuthentication"
+        - path: /etc/ssh/sshd_config
+          regexp: "^PermitEmptyPasswords"
+          line: "#PermitEmptyPasswords no"
+        - path: /etc/ssh/sshd_config
+          regexp: "^#PubkeyAuthentication"
+          line: "#PubkeyAuthentication"
+
+    - name: Disable config for root login, password auth, empty pw's and enable config for public key auth
+      blockinfile:
+        block: "{{ item.block }}"
+        path: "{{ item.path }}"
+        insertbefore: BOF
+        validate: "{{ item.validate }}"
+        create: yes
+      loop:
+        - path: /etc/ssh/sshd_config
+          block: |
+            PermitRootLogin no
+            PasswordAuthentication no
+            PermitEmptyPasswords no
+            PubkeyAuthentication yes
+          validate: /usr/sbin/sshd -T -f %s
+        - path: /etc/sudoers.d/local
+          block: |
+            local    ALL = NOPASSWD: ALL
+          validate: /usr/sbin/visudo -cf %s
+
+    - name: Download GitLab-Runner
+      get_url:
+        url: https://gitlab-runner-downloads.s3.amazonaws.com/latest/rpm/gitlab-runner_amd64.rpm
+        dest: /home/local
+
+    - name: Install GitLab-Runner
+      dnf:
+        name: /home/local/gitlab-runner_amd64.rpm
+        state: present
+        disable_gpg_check: yes
+
+    - name: Cleanup download file
+      file:
+        path: /home/local/gitlab-runner_amd64.rpm
+        state: absent
+
+    - name: Install the latest version of config-manager from the hashicorp repo
+      command: dnf config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+      args:
+        warn: no
+
+    - name: Install Packer
+      dnf:
+        name:
+          - packer
+        state: latest
+

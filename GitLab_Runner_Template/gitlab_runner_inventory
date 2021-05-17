@@ -1,0 +1,14 @@
+[default]
+gitlab-runner.example.com ansible_sudo_pass=server ansible_ssh_user=root ansible_ssh_pass=server ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+[localhost_vars]
+127.0.0.1
+
+[vcenter_instance_vars]
+127.0.0.1
+gitlab-runner.example.com
+
+[gitlab_runner_instance_vars]
+127.0.0.1
+gitlab-runner.example.com
+
