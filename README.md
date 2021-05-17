@@ -5,7 +5,7 @@ Automated DevOps is a repo that integrates Red Hat Linux 8, CentOS Stream and Or
 
 ## Step 1: Clone Repo
 ```bash
-https://github.com/mytechnotalent/Automated-DevOps.git
+git clone https://github.com/mytechnotalent/Automated-DevOps.git
 ```
 
 ## Step 2: Run `setup.sh`
