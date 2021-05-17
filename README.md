@@ -62,6 +62,11 @@ pip install --upgrade pip
 pip install -r requirements.txt 
 cat ~/.ssh/id_rsa.pub
 vim Enterprise_Instance_Templates/files/lab_admin.pub
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+git add .
+git commit -m "Add lab_admin.pub key"
+git push
 ```
 
 ## Step 9: Automate Enterprise Instance Template Creation
