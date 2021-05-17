@@ -69,12 +69,12 @@ git commit -m "Add lab_admin.pub key"
 git push
 ```
 
-## Step 9: Automate Enterprise Instance Template Creation
+## Step 9: Automate Creation
 ```bash
 sudo gitlab-runner run
 ```
 
-## Step 10: Automate GitLab Runner Template & Enterprise Instance Template Destruction [MAC]
+## Step 10: Automate Destruction [MAC]
 ```bash
 ansible-playbook -i GitLab_Runner_Template/gitlab_runner_inventory GitLab_Runner_Template/destroy_gitlab_runner_template.yml
 ansible-playbook -i Enterprise_Instance_Templates/enterprise_instance_inventory Enterprise_Instance_Templates/destroy_enterprise_instances.yml
