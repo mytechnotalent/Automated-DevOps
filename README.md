@@ -1,7 +1,7 @@
 ![image](https://github.com/mytechnotalent/Automated-DevOps/blob/main/Automated%20DevOps.png?raw=true)
 
 # Automated DevOps
-Automated DevOps is a repo that has Red Hat Linux 8, CentOS Stream and Oracle Linux 8 Packer templates for a vSphere & ESXi enterprise environment with Ansible provisioning for the VM instances.
+Automated DevOps is a repo that integrates Red Hat Linux 8, CentOS Stream and Oracle Linux 8 Packer templates for a vSphere & ESXi enterprise environment with Ansible provisioning for the VM instances utilizing GitLab Infrastructure As Code build automation.
 
 ## Step 1: Clone Repo
 ```bash
@@ -16,7 +16,32 @@ https://github.com/mytechnotalent/Automated-DevOps.git
 ## Step 3: Import Repo In GitLab
 [Instructions](https://docs.gitlab.com/ee/user/project/import/github.html)
 
-IN DEVELOPMENT...
+## Step 4: Install SSH Pass
+```bash
+brew install hudochenkov/sshpass/sshpass
+```
+
+## Step 5: Setup SSH In GitLab
+```bash
+ssh local@gitlab-runner.example.com
+stty sane
+ssh-keygen -t rsa -b 2048
+cat ~/.ssh/id_rsa.pub
+[Preferences - SSH Keys - Add an SSH key - Add key]
+```
+
+## Step 6: Clone Repo -> GitLab Runner VM
+```bash
+git clone git@gitlab.com:<gitlab-account>/automated-devops.git
+cd automated-devops
+
+```
+
+## Step 6: Register GitLab Runner
+```bash
+su  # password: server
+
+```
 
 ## License
 [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
