@@ -51,19 +51,23 @@ sudo gitlab-runner register  # password: server
   ci
   shell
 sudo gitlab-runner status
+sudo gitlab-runner stop
 ```
 
-## Step 8: Setup Automation Environment
+## Step 8: Setup Enterprise Automation Environment
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt 
+cat ~/.ssh/id_rsa.pub
+vim Enterprise_Instance_Templates/files/lab_admin.pub
+```
 
 ## Step 9: Automate Enterprise Instance Template Creation
 ```bash
-
-
+sudo gitlab-runner run
+```
 
 ## License
 [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
