@@ -62,3 +62,47 @@
           - git
         state: latest
 
+    - name: Setup disable config for root login, password auth, empty pw's and enable config for public key auth
+      lineinfile:
+        path: "{{ item.path }}"
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        owner: root
+        group: root
+        state: present
+        create: "{{ item.create | default('no') }}"
+        insertbefore: "{{ item.instertbefore | default(omit) }}"
+        validate: "{{ item.validate | default(omit) }}"
+      loop:
+        - path: /etc/ssh/sshd_config
+          regexp: "^PermitRootLogin yes"
+          line: "#PermitRootLogin"
+        - path: /etc/ssh/sshd_config
+          regexp: "^PasswordAuthentication"
+          line: "#PasswordAuthentication"
+        - path: /etc/ssh/sshd_config
+          regexp: "^PermitEmptyPasswords"
+          line: "#PermitEmptyPasswords no"
+        - path: /etc/ssh/sshd_config
+          regexp: "^#PubkeyAuthentication"
+          line: "#PubkeyAuthentication"
+
+    - name: Disable config for root login, password auth, empty pw's and enable config for public key auth
+      blockinfile:
+        block: "{{ item.block }}"
+        path: "{{ item.path }}"
+        insertbefore: BOF
+        validate: "{{ item.validate }}"
+        create: yes
+      loop:
+        - path: /etc/ssh/sshd_config
+          block: |
+            PermitRootLogin no
+            PasswordAuthentication no
+            PermitEmptyPasswords no
+            PubkeyAuthentication yes
+          validate: /usr/sbin/sshd -T -f %s
+        - path: /etc/sudoers.d/local
+          block: |
+            local    ALL = NOPASSWD: ALL
+          validate: /usr/sbin/visudo -cf %s
