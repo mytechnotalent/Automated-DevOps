@@ -106,3 +106,8 @@
           block: |
             local    ALL = NOPASSWD: ALL
           validate: /usr/sbin/visudo -cf %s
+    
+    - name: Restart sshd to pick up config changes
+      systemd:
+        state: restarted
+        name: sshd
