@@ -153,3 +153,8 @@
           - packer
         state: latest
 
+    - name: Restart sshd to pick up config changes
+      systemd:
+        state: restarted
+        name: sshd
+    
