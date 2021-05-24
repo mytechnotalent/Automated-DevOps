@@ -1,6 +1,7 @@
 stages:
   - create-enterprise-instances
   - provision-enterprise-instances
+  # - destroy-enterprise-instances
 
 create-enterprise-instances-code-job:
   stage: create-enterprise-instances
@@ -21,4 +22,13 @@ provision-enterprise-instances-code-job:
     - ansible-playbook -i enterprise_instance_inventory provision_enterprise_instances.yml 
   tags:
     - ci
-  
+
+# destroy-enterprise-instances-code-job:
+#   stage: destroy-enterprise-instances
+#   script:
+#     - cd /home/local/automated-devops
+#     - source venv/bin/activate
+#     - cd /home/local/automated-devops/Enterprise_Instance_Templates
+#     - ansible-playbook -i enterprise_instance_inventory destroy_enterprise_instances.yml 
+#   tags:
+#     - ci
