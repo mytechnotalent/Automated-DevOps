@@ -29,7 +29,7 @@
       loop: "{{ pubkeys }}"
 
 - name: Register Red Hat Manager
-  hosts: 192.168.22.100
+  hosts: <hostname_1>
   gather_facts: no
   become: yes
   become_method: sudo
