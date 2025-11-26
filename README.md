@@ -81,5 +81,7 @@ ansible-playbook -i GitLab_Runner_Template/gitlab_runner_inventory GitLab_Runner
 ansible-playbook -i Enterprise_Instance_Templates/enterprise_instance_inventory Enterprise_Instance_Templates/destroy_enterprise_instances.yml
 ```
 
-## License
+<br>
+
+# License
 [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
