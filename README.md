@@ -3,25 +3,26 @@
 # Automated DevOps
 Automated DevOps is a repo that integrates Red Hat Linux 8, CentOS Stream and Oracle Linux 8 Packer templates for a vSphere & ESXi enterprise environment with Ansible provisioning for the VM instances utilizing GitLab Infrastructure As Code build automation.
 
-## Step 1: Clone Repo
+<br>
+
+# Step 1: Clone Repo
 ```bash
 git clone https://github.com/mytechnotalent/Automated-DevOps.git
 ```
-
-## Step 2: Run `setup.sh` [MAC]
+# Step 2: Run `setup.sh` [MAC]
 ```bash
 ./setup.sh
 ```
 
-## Step 3: Import Repo In GitLab
+# Step 3: Import Repo In GitLab
 [Instructions](https://docs.gitlab.com/ee/user/project/import/github.html)
 
-## Step 4: Install SSH Pass
+# Step 4: Install SSH Pass
 ```bash
 brew install hudochenkov/sshpass/sshpass
 ```
 
-## Step 5: Setup SSH In GitLab
+# Step 5: Setup SSH In GitLab
 ```bash
 ssh local@gitlab-runner.example.com
 stty sane
@@ -30,7 +31,7 @@ cat ~/.ssh/id_rsa.pub
 [Preferences - SSH Keys - Add an SSH key - Add key]
 ```
 
-## Step 6: Clone Repo -> GitLab Runner VM
+# Step 6: Clone Repo -> GitLab Runner VM
 ```bash
 git clone git@gitlab.com:<gitlab-account>/automated-devops.git
 cd automated-devops
@@ -42,7 +43,7 @@ vim ~/.vimrc
   syntax on
 ```
 
-## Step 7: Register GitLab Runner
+# Step 7: Register GitLab Runner
 ```bash
 sudo gitlab-runner register  # password: server
   https://gitlab.com
@@ -54,7 +55,7 @@ sudo gitlab-runner status
 sudo gitlab-runner stop
 ```
 
-## Step 8: Setup Enterprise Automation Environment
+# Step 8: Setup Enterprise Automation Environment
 ```bash
 python3 -m venv venv
 source venv/bin/activate
@@ -69,12 +70,12 @@ git commit -m "Add lab_admin.pub key"
 git push
 ```
 
-## Step 9: Automate Creation
+# Step 9: Automate Creation
 ```bash
 sudo gitlab-runner run
 ```
 
-## Step 10: Automate Destruction [MAC]
+# Step 10: Automate Destruction [MAC]
 ```bash
 ansible-playbook -i GitLab_Runner_Template/gitlab_runner_inventory GitLab_Runner_Template/destroy_gitlab_runner_template.yml
 ansible-playbook -i Enterprise_Instance_Templates/enterprise_instance_inventory Enterprise_Instance_Templates/destroy_enterprise_instances.yml
